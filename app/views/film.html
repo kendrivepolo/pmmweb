@@ -1,0 +1,111 @@
+<style>
+    .my-drop-zone {
+        border: dotted 3px lightgray;
+    }
+
+    .nounderline {
+        text-decoration: none !important;
+    }
+</style>
+<div class="jumbotron">
+    <h1><span editable-text="film.title" buttons="no" blur="submit">{{film.title}}</span></h1>
+
+    <p class="lead">
+
+    <div class="well my-drop-zone" nv-file-drop="" nv-file-over="" uploader="coverImageUploader">
+        <img id="coverImage" class="img-responsive center-block" ng-src="{{coverImageUrl}}" alt="film cover image">
+    </div>
+    <p class="text-left">
+        <span editable-textarea="film.description" e-rows="10" e-cols="50" buttons="no" blur="submit">{{film.description || "empty" }}</span>
+    </p>
+    </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <p class="text-left" style="position:relative;">
+                    <span class="label label-default">{{'Street Date'| atLeast:27 || "empty"}}</span>
+                </p>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <p>
+                    <span editable-text="film.streetDate" buttons="no" blur="submit"
+                          e-style="position:absolute; right: 0; top:0;" class="pull-right">{{film.streetDate || "empty" | date:'longDate'}}</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <p class="text-left" style="position:relative;">
+                    <span class="label label-default">{{'Performers'| atLeast:26}}</span>
+                </p>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <p>
+                    <span editable-text="film.performers" buttons="no" blur="submit"
+                          e-style="position:absolute; right: 0; top:0;" class="pull-right">{{film.performers || "empty"}}</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <p class="text-left" style="position:relative;">
+                    <span class="label label-default">{{'Studio'| atLeast:31}}</span>
+                </p>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <p>
+                    <span editable-select="film.studio" onshow="listStudios()"
+                          e-ng-options="s.name for s in studios track by s.name" buttons="no"
+                          blur="submit" e-style="position:absolute; right: 0; top:0; width: 250px;"
+                          class="pull-right">{{film.studio.name || "empty"}}</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <p class="text-left" style="position:relative;">
+                    <span class="label label-default">{{'Format' | atLeast:30}}</span><span class="pull-right">
+                </p>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <p>
+                    <span ng-repeat="mediafile in film.mediaFiles" class="pull-right">
+                    <a class="nounderline" href="#" editable-select="film.mediaFiles[{{$index}}].format"
+                       onshow="listMediaTypes()" e-ng-options="t for t in mediaTypes" buttons="no" blur="submit">{{mediafile.format}} </a>
+                    (<a href="#" editable-text="film.mediaFiles[{{$index}}].storage" buttons="no" blur="submit">{{mediafile.storage
+                        || 'empty' }}</a> )
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <p class="text-left">
+            <span class="label label-default" ng-click="filmCommentForm.$show()">{{'Comment' | atLeast:26}}</span>
+        <blockquote class="text-left"><span style="white-space: pre-line;">{{film.comment}}</span></blockquote>
+        <span editable-textarea="appendComment" e-rows="5" e-cols="50" buttons="no" blur="submit" class="btn">{{'Add Comment' }}</span>
+        </p>
+    </div>
+    <div class="container">
+        <div class="well my-drop-zone" nv-file-drop="" nv-file-over="" uploader="screenshotImagesUploader">
+            drag & drop screenshots here
+        </div>
+        <div ng-repeat="screenshot in screenshots">
+            <div class="col-sm-6 col-md-4"><a href="#" class="thumbnail"><img title="{{$index}}"
+                                                                              src="{{screenshotImageBaseUrl + '/' + screenshots[$index]}}"
+                                                                              class="img-responsive"></a></div>
+        </div>
+    </div>
+
+    <p>
+
+    <div ng-show="showUpdateFilmResult" class="bg-danger">update film fails !</div>
+    </p>
+    <p><a href="#/">
+        <button type="button" class="btn btn-info btn-block" ng-click="setFocus('Home');">Back</button>
+    </a></p>
+</div>
+
+<div class="clearfix"></div>

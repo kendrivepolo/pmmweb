@@ -1,0 +1,73 @@
+ 
+<style>
+.my-drop-zone { border: dotted 3px lightgray; }
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+.another-file-over-class { border: dotted 3px green; }
+html, body { height: 100%; }
+canvas {
+background-color: #f3f3f3;
+-webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+-moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+box-shadow: 3px 3px 3px 0 #e3e3e3;
+border: 1px solid #c3c3c3;
+height: 100px;
+margin: 6px 0 0 6px;
+}
+</style>
+
+<form role="form" ng-submit="createFilm()">
+  <fieldset ng-disabled="createFilmSuccess">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input type="text" class="form-control" id="title" ng-model="film.title" required>
+  </div>
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea rows="5" class="form-control" id="description" ng-model="film.description"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="streetDate">Street Date:</label>
+    <input type="text" class="form-control" id="streetDate" ng-model="film.streetDate">
+  </div>
+  <div class="form-group">
+    <label for="performers">Performers:</label>
+    <input type="text" class="form-control" id="performers" ng-model="film.performers">
+  </div>
+  <div class="form-group">
+      <label for="studio">Studio:</label>
+      <button type="button" class="btn btn-default btn-sm pull-right" ng-click="showAddStudio()">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      <select class="form-control" id="studio" ng-click="listStudios()" ng-model="film.studio" ng-options="s.name for s in studios track by s.name" ng-hide="showAddStudioFlag">
+      <div ng-show="showAddStudioFlag">
+          <label for="newStudio">Add:</label><input type="text" class="form-control" id="newStudio" ng-model="newStudio" ng-show="showAddStudioFlag">
+      </div> 
+      </select>
+  </div>
+  <div class="form-group">
+      <label for="mediaType">Media Type:</label>
+      <select class="form-control" id="mediaType" ng-click="listMediaTypes()" ng-model="mediaType" ng-options="t for t in mediaTypes">
+      </select>
+  </div>
+  <div class="form-group">
+    <label for="storage">Storage:</label>
+    <input type="text" class="form-control" id="storage" ng-model="storage">
+  </div>
+  <div class="form-group">
+    <label for="description">Comment:</label>
+    <textarea rows="5"class="form-control" id="comment" ng-model="film.comment"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="cover">Cover Image:</label>
+    <input type="file" id="cover" onchange="angular.element(this).scope().setCoverImage(this.files)">
+  </div>
+  <div class="form-group">
+    <label for="screenshots">Screenshot Images:</label>
+    <input type="file" multiple id="screenshots" onchange="angular.element(this).scope().setScreenshotImages(this.files)">
+  </div>
+  </fieldset>
+
+  <button type="submit" ng-hide="createFilmSuccess" class="btn btn-default">Submit</button>
+  <a href="#/"><button type="button" class="btn btn-default" ng-click="setFocus('Home');">Cancel</button></a>
+  <a href="#/"><button ng-show="createFilmSuccess" class="btn btn-success" ng-click="clearCurrentPageInCookie(); setFocus('Home');">Back</button></a>
+</form>
