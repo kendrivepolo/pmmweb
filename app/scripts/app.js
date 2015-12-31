@@ -23,8 +23,8 @@ angular
     .run(function (editableOptions, $rootScope) {
         editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
        $rootScope.baseUrl = 'http://59.125.131.152/mymovies-backend-4.1';
-         //$rootScope.baseUrl = 'http://localhost:8080/mymovies-backend-4.1';
-        //$rootScope.baseUrl = '../mymovies-backend-4.1';
+       //$rootScope.baseUrl = 'http://localhost:8080/pmm';
+       //$rootScope.baseUrl = '../mymovies-backend-4.1';
     })
     .config(function ($routeProvider) {
         $routeProvider

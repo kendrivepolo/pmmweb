@@ -8,7 +8,7 @@
  * Controller of the mymovies41FrontendApp
  */
 angular.module('mymovies41FrontendApp')
-  .controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $location, $anchorScroll, Films) {
+  .controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $location, $anchorScroll, Films, Searcher) {
    var startPage = 1;
    var filmsPerPage = 30;
    if (angular.isDefined($cookies.currentPage)) { startPage = parseInt($cookies.currentPage, 10); }
@@ -39,6 +39,14 @@ angular.module('mymovies41FrontendApp')
          }
      }); 
     };//end of function showFilmsByPage
+
+
+
+   $scope.searchFilms = function () {
+       Searcher.searchFilms($scope.keyword).then(function (response) {
+           $scope.films = response.data;
+       });
+   };
 
     /**
     * Function showPager

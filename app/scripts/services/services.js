@@ -72,7 +72,7 @@ services.factory('MediaTypes',  ['$http',  '$rootScope', function($http, $rootSc
 //
 //define 'Search' Service
 //
-services.factory('Search',  ['$http',  '$rootScope', function($http, $rootScope) {
+services.factory('Searcher',  ['$http',  '$rootScope', function($http, $rootScope) {
     return {
         searchFilms : function(keyword) {
             return $http.get($rootScope.baseUrl + '/search/' + keyword);
