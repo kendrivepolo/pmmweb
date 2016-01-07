@@ -29,12 +29,12 @@
           <li ng-class="{active: isCreateFilmPage}"><a ng-href="#/new" ng-click="setFocus('CreateFilm')">New</a></li>
             <!--<input type="search" placeholder="keyword..." valign="bottom">-->
             <li>
-                <form class="navbar-form" role="search">
+                <form class="navbar-form" ng-submit="submit()" ng-controller="SearchCtrl">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="" name="srch-term" id="srch-term"
                                ng-model="keyword">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit" ng-click="searchFilms()"><i class="glyphicon glyphicon-search"></i></button>
+                            <button class="btn btn-default" type="submit" ng-click="submit()"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
                     </div>
                 </form>
@@ -91,6 +91,7 @@
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/services.js"></script>
         <script src="scripts/controllers/signin.js"></script>
+        <script src="scripts/controllers/searchfilm.js"></script>
         <!-- endbuild -->
 </body>
 </html>
