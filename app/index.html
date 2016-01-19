@@ -25,21 +25,25 @@
     <div class="container container-xs-height">
       <div class="header">
         <ul class="nav nav-pills pull-right" ng-controller="MainCtrl">
-          <li ng-class="{active: isHomePage}"><a ng-href="#" ng-click="clearCurrentPageInCookie(); setFocus('Home');">Home</a></li>
-          <li ng-class="{active: isCreateFilmPage}"><a ng-href="#/new" ng-click="setFocus('CreateFilm')">New</a></li>
+            <li ng-class="{active: isHomePage}"><a ng-href="#" ng-click="clearCurrentPageInCookie(); setFocus('Home');">Home</a></li>
+            <li ng-class="{active: isCreateFilmPage}"><a ng-href="#/new" ng-click="setFocus('CreateFilm')">New</a></li>
             <!--<input type="search" placeholder="keyword..." valign="bottom">-->
             <li>
-                <form class="navbar-form" role="search">
+                <form class="navbar-form" role="search" ng-submit="submit()" ng-controller="SearchCtrl">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="" name="srch-term" id="srch-term"
                                ng-model="keyword">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit" ng-click="searchFilms()"><i class="glyphicon glyphicon-search"></i></button>
+                            <button class="btn btn-default" type="submit" ng-click="submit()"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
                     </div>
                 </form>
              </li>
-		</ul>
+            <li><a href="#/logout">
+                <span class="glyphicon glyphicon-log-out"></span>
+                </a>
+            </li>
+	</ul>
         <h3 class="text-muted">My Movie Collections</h3>
       </div>
 
@@ -89,7 +93,10 @@
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/film.js"></script>
         <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/searchfilm.js"></script>
         <script src="scripts/services/services.js"></script>
+        <script src="scripts/services/businessServices.js"></script>
         <script src="scripts/controllers/signin.js"></script>
         <!-- endbuild -->
 </body>

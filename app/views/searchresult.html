@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<table class="table table-striped">
+<caption>Search results of keyword: {{keyword}}</caption>
+<thead>
+<tr>
+<th>Cover</th>
+<th>Title</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="film in films">
+    <td><img ng-src="{{baseUrl}}/films/{{film.filmId}}/cover" class="img-rounded" height="215px"/></td>
+    <td><a href='#/film/{{film.filmId}}'>{{film.title}}</a></td>
+    <td><span ng-bind-html="film.highlightedText"></span></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

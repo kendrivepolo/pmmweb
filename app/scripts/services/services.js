@@ -80,6 +80,13 @@ services.factory('Searcher',  ['$http',  '$rootScope', function($http, $rootScop
     };
 }]);
 
+services.factory('Login', ['$resource', '$rootScope', 
+    function($resource, $rootScope) {
+        return $resource($rootScope.baseUrl + '/accesstoken', {}, {
+           login: {method: 'POST', cache: false, isArray: false}
+        });
+    }]);
+
 services.factory('logService', function () {
 var messageCount = 0;
 return {

@@ -8,7 +8,13 @@
  * Controller of the mymovies41FrontendApp
  */
 angular.module('mymovies41FrontendApp')
-    .controller('ViewFilmCtrl', function ($scope, $cookies, $routeParams, $log, $http, $rootScope, FileUploader, Films, Studios, MediaTypes) {
+    .controller('ViewFilmCtrl', function ($scope, $cookies, $routeParams, $log, 
+        $location, $http, $rootScope, FileUploader, 
+        Films, Studios, MediaTypes, checkCreds) {
+        //check login info    
+        if (!checkCreds()) {
+            $location.path('/login');
+        }    
 
         var film = {};
         var coverImageUrl = $rootScope.baseUrl + '/films/' + $routeParams.id + '/cover';
@@ -124,7 +130,13 @@ angular.module('mymovies41FrontendApp')
         };
 
     })//end of ViewFilmCtrl
-    .controller('CreateFilmCtrl', function ($scope, $cookies, $routeParams, $log, $http, $rootScope, FileUploader, Films, Studios, MediaTypes) {
+    .controller('CreateFilmCtrl', function ($scope, $cookies, $routeParams, 
+        $location, $log, $http, $rootScope, FileUploader, 
+        Films, Studios, MediaTypes, checkCreds) {
+        //check login info    
+        if (!checkCreds()) {
+            $location.path('/login');
+        } 
         var coverImage;
         var screenshotImages = [];
 
