@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+'use strict';
 
 angular.module('mymovies41FrontendApp')
     .controller('LoginCtrl', function ($scope, $location, setCreds, Login) {
@@ -13,23 +14,23 @@ angular.module('mymovies41FrontendApp')
              */
             
             var postData = {
-                "userId": $scope.userid,
-                "passwd": $scope.password
+                'userId': $scope.userid,
+                'passwd': $scope.password
             };
             
             Login.login({}, postData,
                     function success(response) {
-                        console.log("Success:" + JSON.stringify(response));
+                        console.log('Success:' + JSON.stringify(response));
                         if (response.authenticated) {
-                            setCreds($scope.userid, $scope.password);
+                            setCreds($scope.userid, $scope.password, response.userkey);
                             $location.path('/');
                         } else {
-                            $scope.error = "Login Failed";
+                            $scope.error = 'Login Failed';
                         }
 
                     },
                     function error(errorResponse) {
-                        console.log("Error:" + JSON.stringify(errorResponse));
+                        console.log('Error:' + JSON.stringify(errorResponse));
                     }
             );
            

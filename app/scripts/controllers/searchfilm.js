@@ -11,7 +11,7 @@ angular.module('mymovies41FrontendApp')
   .controller('SearchCtrl', function ($scope, $location) {
     $scope.submit = function(){
       $location.path('/doSearch/' + $scope.keyword);
-    }
+    };
   });
 
 angular.module('mymovies41FrontendApp')

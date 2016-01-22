@@ -72,10 +72,10 @@ services.factory('MediaTypes',  ['$http',  '$rootScope', function($http, $rootSc
 //
 //define 'Search' Service
 //
-services.factory('Searcher',  ['$http',  '$rootScope', function($http, $rootScope) {
+services.factory('Searcher',  ['$http',  '$rootScope', 'getUsername', function($http, $rootScope, getUsername) {
     return {
         searchFilms : function(keyword) {
-            return $http.get($rootScope.baseUrl + '/search/' + keyword);
+            return $http.get($rootScope.baseUrl + '/search/' + getUsername() + '/' + keyword);
         }
     };
 }]);
