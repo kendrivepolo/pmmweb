@@ -27,7 +27,7 @@
         <ul class="nav nav-pills pull-right" ng-controller="MainCtrl">
             <li ng-class="{active: isHomePage}"><a ng-href="#" ng-click="clearCurrentPageInCookie(); setFocus('Home');">Home</a></li>
             <li ng-class="{active: isCreateFilmPage}"><a ng-href="#/new" ng-click="setFocus('CreateFilm')">New</a></li>
-            <!--<input type="search" placeholder="keyword..." valign="bottom">-->
+            <!--
             <li>
                 <form class="navbar-form" role="search" ng-submit="submit()" ng-controller="SearchCtrl">
                     <div class="input-group">
@@ -38,7 +38,8 @@
                         </div>
                     </div>
                 </form>
-             </li>
+            </li>
+            -->
             <li><a href="#/logout">
                 <span class="glyphicon glyphicon-log-out"></span>
                 </a>
@@ -47,7 +48,7 @@
         <h3 class="text-muted">My Movie Collections</h3>
       </div>
 
-		<div ng-view=""></div>
+      <div ng-view=""></div>
 
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>

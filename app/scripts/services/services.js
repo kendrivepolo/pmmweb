@@ -2,14 +2,14 @@
 
 var services = angular.module('MyServices', []);
 
-services.factory('Films',  ['$http', '$rootScope','$cacheFactory', function($http, $rootScope, $cacheFactory) {
+services.factory('Films',  ['$http', '$rootScope','$cacheFactory','getUsername', function($http, $rootScope, $cacheFactory, getUsername) {
     return {
         getTotalFilmNumber : function() {
-             return $http.get($rootScope.baseUrl + '/films/number');
+             return $http.get($rootScope.baseUrl + '/films/number?ownerid=' + getUsername());
         },
 
         getFilmsByPage : function(page, size) {
-            return $http.get($rootScope.baseUrl + '/films?page=' + page + '&size=' + size, { cache: true });
+            return $http.get($rootScope.baseUrl + '/films?ownerid=' + getUsername() + '&page=' + page + '&size=' + size, { cache: true });
         },
 
         getFilm : function(id){
@@ -20,18 +20,17 @@ services.factory('Films',  ['$http', '$rootScope','$cacheFactory', function($htt
             return $http.get($rootScope.baseUrl + '/films/' + id + '/screenshots', { cache: true });
         },
 
-       updateFilm : function(film){
+        updateFilm : function(film){
             return $http.put($rootScope.baseUrl + '/films/' + film.id, film).success(function() {
                 var $httpDefaultCache = $cacheFactory.get('$http');
                 $httpDefaultCache.removeAll();
              });
-       },
+        },
 
-       createFilm : function(film, coverImage, screenshotImages){
+        createFilm : function(film, coverImage, screenshotImages){
             var fd = new FormData();
             fd.append('cover', coverImage);
             for(var i=0; i<screenshotImages.length;i++) {
-                console.log('screenshot: ' + i);
                 fd.append('screenshots', screenshotImages[i]);
             }
             fd.append('body', JSON.stringify(film));
