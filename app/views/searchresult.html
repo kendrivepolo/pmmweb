@@ -6,8 +6,18 @@
 </head>
 <body>
 
-<table class="table table-striped">
-<caption>Search results of keyword: {{keyword}}</caption>
+<form class="navbar-form" role="search" ng-submit="submit()" ng-controller="SearchCtrl">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="" name="srch-term" id="srch-term"
+               ng-model="keyword">
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" ng-click="submit()">
+            <i class="glyphicon glyphicon-search"></i></button>
+        </div>
+    </div>
+</form>
+    
+<table class="table table-striped table-responsive">
 <thead>
 <tr>
 <th>Cover</th>
@@ -17,7 +27,7 @@
 </thead>
 <tbody>
 <tr ng-repeat="film in films">
-    <td><img ng-src="{{baseUrl}}/films/{{film.filmId}}/cover" class="img-rounded" height="215px"/></td>
+    <td><img ng-src="{{baseUrl}}/films/{{film.filmId}}/cover?x=140&y=215" class="img-responsive img-rounded" style="width:140px;height:215x;"/></td>
     <td><a href='#/film/{{film.filmId}}'>{{film.title}}</a></td>
     <td><span ng-bind-html="film.highlightedText"></span></td>
 </tr>
