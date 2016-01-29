@@ -78,6 +78,11 @@ angular.module('mymovies41FrontendApp')
                 }
             );
         };
+        
+        $scope.deleteFilm = function () {
+            Films.deleteFilm($scope.film.id);
+            $log.log("delete film " + $scope.film.id);
+        };
 
         var calculateProperyContent = function () {
             var propertyContent = '';

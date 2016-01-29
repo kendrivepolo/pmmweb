@@ -27,7 +27,7 @@
 </thead>
 <tbody>
 <tr ng-repeat="film in films">
-    <td><img ng-src="{{baseUrl}}/films/{{film.filmId}}/cover?x=140&y=215" class="img-responsive img-rounded" style="width:140px;height:215x;"/></td>
+    <td><img ng-src="{{baseUrl}}/films/{{film.filmId}}/cover?x=215&y=140" class="img-responsive img-rounded" style="width:215px;height:140px;"/></td>
     <td><a href='#/film/{{film.filmId}}'>{{film.title}}</a></td>
     <td><span ng-bind-html="film.highlightedText"></span></td>
 </tr>

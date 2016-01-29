@@ -42,6 +42,13 @@ services.factory('Films',  ['$http', '$rootScope','$cacheFactory','getUsername',
                 var $httpDefaultCache = $cacheFactory.get('$http');
                 $httpDefaultCache.removeAll();
             });
+       },
+       
+       deleteFilm : function(filmId) {
+           return $http.delete($rootScope.baseUrl + '/films/' + filmId).success(function() {
+                var $httpDefaultCache = $cacheFactory.get('$http');
+                $httpDefaultCache.removeAll();
+             });
        }
     };
 }]);
