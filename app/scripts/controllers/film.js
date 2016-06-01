@@ -8,7 +8,13 @@
  * Controller of the mymovies41FrontendApp
  */
 angular.module('mymovies41FrontendApp')
-    .controller('ViewFilmCtrl', function ($scope, $cookies, $routeParams, $log, $http, $rootScope, FileUploader, Films, Studios, MediaTypes) {
+    .controller('ViewFilmCtrl', function ($scope, $cookies, $routeParams, $log, 
+        $location, $http, $rootScope, FileUploader, 
+        Films, Studios, MediaTypes, checkCreds) {
+        //check login info    
+        if (!checkCreds()) {
+            $location.path('/login');
+        }    
 
         var film = {};
         var coverImageUrl = $rootScope.baseUrl + '/films/' + $routeParams.id + '/cover';
@@ -72,6 +78,11 @@ angular.module('mymovies41FrontendApp')
                 }
             );
         };
+        
+        $scope.deleteFilm = function () {
+            Films.deleteFilm($scope.film.id);
+            $log.log("delete film " + $scope.film.id);
+        };
 
         var calculateProperyContent = function () {
             var propertyContent = '';
@@ -88,7 +99,7 @@ angular.module('mymovies41FrontendApp')
         $scope.$watch('appendComment', function() {
             var d = new Date();
             if (angular.isDefined($scope.film) && $scope.appendComment !== '') {
-            	if ($scope.film.comment == null) {
+            	if ($scope.film.comment === null) {
             		$scope.film.comment = '';
             	}
                 $scope.film.comment = $scope.film.comment + '\n\r[' + d.toDateString() + ']\n\r' + $scope.appendComment;
@@ -124,7 +135,13 @@ angular.module('mymovies41FrontendApp')
         };
 
     })//end of ViewFilmCtrl
-    .controller('CreateFilmCtrl', function ($scope, $cookies, $routeParams, $log, $http, $rootScope, FileUploader, Films, Studios, MediaTypes) {
+    .controller('CreateFilmCtrl', function ($scope, $cookies, $routeParams, 
+        $location, $log, $http, $rootScope, FileUploader, 
+        Films, Studios, MediaTypes, checkCreds, getUsername) {
+        //check login info    
+        if (!checkCreds()) {
+            $location.path('/login');
+        } 
         var coverImage;
         var screenshotImages = [];
 
@@ -150,6 +167,8 @@ angular.module('mymovies41FrontendApp')
                 mediaFiles[0] = mediaFile;
                 $scope.film.mediaFiles = mediaFiles;
             }
+            
+            $scope.film.ownerId = getUsername();
 
             Films.createFilm($scope.film, coverImage, screenshotImages).then(
                 function () {

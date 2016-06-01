@@ -8,21 +8,34 @@
   <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
 </div>
 -->
+<form class="navbar-form" role="search" ng-submit="submit()" ng-controller="SearchCtrl">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="" name="srch-term" id="srch-term"
+               ng-model="keyword">
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" ng-click="submit()">
+            <i class="glyphicon glyphicon-search"></i></button>
+        </div>
+    </div>
+</form>
+
 <div ng-controller="MainCtrl" id="film-table">
 
 <!-- Example row of columns -->
       <div class="row row-xs-height" ng-repeat="row in filmChunks">
         <!--<div class="col-sm-6 col-md-4" ng-repeat="film in row">-->
         <div class="col-xs-12 col-sm-4" ng-repeat="film in row">
-            <a href='#/film/{{film.id}}'>
             <div class="thumbnail" id="film-{{film.id}}">
-                <img ng-src="{{baseUrl}}/films/{{film.id}}/cover?cb={{imgTimestamp}}" alt="film cover image">
+                <a href='#/film/{{film.id}}'>
+                    <img ng-src="{{baseUrl}}/films/{{film.id}}/cover?x=215&y=140&cb={{imgTimestamp}}" alt="film cover image" class="img-rounded" style="width:215px;height:140px;">
+                </a>
                 <div class="caption">
-                    <h2>{{film.title}}</h2>
-                    <p>{{film.description| limitTo:120}} ...</p>
+                    <a href='#/film/{{film.id}}'>
+                        <h2>{{film.title}}</h2>
+                    </a>
+                    <p>{{film.description | limitTo:60}} ...</p>
                 </div>
             </div>
-            </a>
         </div>
         <!--<div class="col-lg-4 col-xs-height" ng-repeat="film in row">
           <h2>{{film.title}}</h2>

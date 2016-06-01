@@ -2,14 +2,14 @@
 
 var services = angular.module('MyServices', []);
 
-services.factory('Films',  ['$http', '$rootScope','$cacheFactory', function($http, $rootScope, $cacheFactory) {
+services.factory('Films',  ['$http', '$rootScope','$cacheFactory','getUsername', function($http, $rootScope, $cacheFactory, getUsername) {
     return {
         getTotalFilmNumber : function() {
-             return $http.get($rootScope.baseUrl + '/films/number');
+             return $http.get($rootScope.baseUrl + '/films/number?ownerid=' + getUsername());
         },
 
         getFilmsByPage : function(page, size) {
-            return $http.get($rootScope.baseUrl + '/films?page=' + page + '&size=' + size, { cache: true });
+            return $http.get($rootScope.baseUrl + '/films?ownerid=' + getUsername() + '&page=' + page + '&size=' + size, { cache: true });
         },
 
         getFilm : function(id){
@@ -20,18 +20,17 @@ services.factory('Films',  ['$http', '$rootScope','$cacheFactory', function($htt
             return $http.get($rootScope.baseUrl + '/films/' + id + '/screenshots', { cache: true });
         },
 
-       updateFilm : function(film){
+        updateFilm : function(film){
             return $http.put($rootScope.baseUrl + '/films/' + film.id, film).success(function() {
                 var $httpDefaultCache = $cacheFactory.get('$http');
                 $httpDefaultCache.removeAll();
              });
-       },
+        },
 
-       createFilm : function(film, coverImage, screenshotImages){
+        createFilm : function(film, coverImage, screenshotImages){
             var fd = new FormData();
             fd.append('cover', coverImage);
             for(var i=0; i<screenshotImages.length;i++) {
-                console.log('screenshot: ' + i);
                 fd.append('screenshots', screenshotImages[i]);
             }
             fd.append('body', JSON.stringify(film));
@@ -43,6 +42,13 @@ services.factory('Films',  ['$http', '$rootScope','$cacheFactory', function($htt
                 var $httpDefaultCache = $cacheFactory.get('$http');
                 $httpDefaultCache.removeAll();
             });
+       },
+       
+       deleteFilm : function(filmId) {
+           return $http.delete($rootScope.baseUrl + '/films/' + filmId).success(function() {
+                var $httpDefaultCache = $cacheFactory.get('$http');
+                $httpDefaultCache.removeAll();
+             });
        }
     };
 }]);
@@ -72,13 +78,20 @@ services.factory('MediaTypes',  ['$http',  '$rootScope', function($http, $rootSc
 //
 //define 'Search' Service
 //
-services.factory('Searcher',  ['$http',  '$rootScope', function($http, $rootScope) {
+services.factory('Searcher',  ['$http',  '$rootScope', 'getUsername', function($http, $rootScope, getUsername) {
     return {
         searchFilms : function(keyword) {
-            return $http.get($rootScope.baseUrl + '/search/' + keyword);
+            return $http.get($rootScope.baseUrl + '/search/' + getUsername() + '/' + keyword);
         }
     };
 }]);
+
+services.factory('Login', ['$resource', '$rootScope', 
+    function($resource, $rootScope) {
+        return $resource($rootScope.baseUrl + '/accesstoken', {}, {
+           login: {method: 'POST', cache: false, isArray: false}
+        });
+    }]);
 
 services.factory('logService', function () {
 var messageCount = 0;
