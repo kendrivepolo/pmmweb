@@ -8,7 +8,13 @@
  * Controller of the mymovies41FrontendApp
  */
 angular.module('mymovies41FrontendApp')
-  .controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $location, $anchorScroll, Films) {
+  .controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, 
+      $location, $anchorScroll, Films, checkCreds) {
+    //check login info    
+    if (!checkCreds()) {
+        $location.path('/login');
+    }  
+        
    var startPage = 1;
    var filmsPerPage = 30;
    if (angular.isDefined($cookies.currentPage)) { startPage = parseInt($cookies.currentPage, 10); }
