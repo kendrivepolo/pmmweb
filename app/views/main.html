@@ -25,13 +25,13 @@
       <div class="row row-xs-height" ng-repeat="row in filmChunks">
         <!--<div class="col-sm-6 col-md-4" ng-repeat="film in row">-->
         <div class="col-xs-12 col-sm-4" ng-repeat="film in row">
-            <div class="thumbnail" id="film-{{film.id}}">
+            <div class="thumbnail" id="film-{{film.id}}" style="display:block; height:400px">
                 <a href='#/film/{{film.id}}'>
                     <img ng-src="{{baseUrl}}/films/{{film.id}}/cover?x=215&y=140&cb={{imgTimestamp}}" alt="film cover image" class="img-rounded" style="width:215px;height:140px;">
                 </a>
                 <div class="caption">
                     <a href='#/film/{{film.id}}'>
-                        <h2>{{film.title}}</h2>
+                        <h2>{{film.title | limitTo:20}}</h2>
                     </a>
                     <p>{{film.description | limitTo:60}} ...</p>
                 </div>
