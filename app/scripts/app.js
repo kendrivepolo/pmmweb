@@ -23,7 +23,7 @@ angular
     ])
     .run(function (editableOptions, $rootScope) {
         editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-       $rootScope.baseUrl = 'http://pmm.office.mt.com.tw/pmm'
+       $rootScope.baseUrl = 'http://pmm.office.mt.com.tw/pmm';
        //$rootScope.baseUrl = 'http://localhost:8080/pmm';
        //$rootScope.baseUrl = '../mymovies-backend-4.1';
     })

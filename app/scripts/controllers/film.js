@@ -81,7 +81,10 @@ angular.module('mymovies41FrontendApp')
         
         $scope.deleteFilm = function () {
             Films.deleteFilm($scope.film.id);
-            $log.log("delete film " + $scope.film.id);
+            //$scope.myModal.modal('hide');
+            //sleep(1000);
+            //$location.path('/');
+            $log.log('delete film ' + $scope.film.id);
         };
 
         var calculateProperyContent = function () {
