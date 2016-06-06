@@ -93,7 +93,12 @@
             drag & drop screenshots here
         </div>
         <div ng-repeat="screenshot in screenshots">
-            <div class="col-sm-6 col-md-4">
+            <div class="col-sm-12" ng-if="screenshots.length === 1">
+                <a href="#" class="thumbnail">
+                    <img title="{{$index}}" src="{{screenshotImageBaseUrl + '/' + screenshots[$index]}}" class="img-responsive">
+                </a>
+            </div>
+            <div class="col-sm-6 col-md-4" ng-if="screenshots.length > 1">
                 <a href="#" class="thumbnail">
                     <img title="{{$index}}" src="{{screenshotImageBaseUrl + '/' + screenshots[$index]}}" class="img-responsive">
                 </a>
