@@ -8,8 +8,7 @@
  * Controller of the mymovies41FrontendApp
  */
 angular.module('mymovies41FrontendApp')
-    .controller('ViewFilmCtrl', function ($scope, $cookies, $routeParams, $log, 
-        $location, $http, $rootScope, FileUploader, 
+    .controller('ViewFilmCtrl', function ($scope, $cookies, $routeParams, $log, $window, $location, $http, $rootScope, FileUploader,
         Films, Studios, MediaTypes, checkCreds) {
         //check login info    
         if (!checkCreds()) {
@@ -46,6 +45,11 @@ angular.module('mymovies41FrontendApp')
             $rootScope.imgTimestamp = random;
         };
 
+        $scope.deleteFilmButton1 = 'Delete';
+        $scope.deleteFilmButton2 = 'Cancel';
+        $scope.deleteFilmConfirmation = 'Are you sure to delete this movie ?';
+        $scope.deleteFilmDeleted = false;
+
         var loadFilm = function () {
             Films.getFilm($routeParams.id).then(function (response) {
                 film = response.data;
@@ -81,9 +85,9 @@ angular.module('mymovies41FrontendApp')
         
         $scope.deleteFilm = function () {
             Films.deleteFilm($scope.film.id);
-            //$scope.myModal.modal('hide');
-            //sleep(1000);
-            //$location.path('/');
+            $scope.deleteFilmDeleted = true;
+            $scope.deleteFilmButton2='OK';
+            $scope.deleteFilmConfirmation = 'This movie has been deleted.';
             $log.log('delete film ' + $scope.film.id);
         };
 
@@ -110,13 +114,20 @@ angular.module('mymovies41FrontendApp')
         });
 
         $scope.$watch(calculateProperyContent, function (newValue, oldValue) {
-            //$log.log('old value: ' + angular.toJson(oldValue));
-            //$log.log('new value: ' + angular.toJson(newValue));
             if (oldValue === '' || newValue === oldValue) {
                 $log.log('film is not changed!');
             } else {
                 $log.log('film is changed, update backend data!');
                 $scope.updateFilm();
+            }
+        });
+
+        //if modal is hidden and film is deleted, return to main page
+        angular.element('#myModal').on('hidden.bs.modal', function () {
+            if ($scope.deleteFilmDeleted === true) {
+                $rootScope.$apply(function() {
+                    $window.history.back();
+                });
             }
         });
 

@@ -41,10 +41,6 @@ angular
                 templateUrl: 'views/createfilm.html',
                 controller: 'CreateFilmCtrl'
             })
-            //.when('/signin', {
-            //  templateUrl: 'views/signin.html',
-            //  controller: 'SigninCtrl'
-            //})
             .when('/doSearch/:keyword', {
                 templateUrl: 'views/searchresult.html',
                 controller: 'DoSearchCtrl'
