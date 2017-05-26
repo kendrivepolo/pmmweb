@@ -30,8 +30,8 @@ angular.module('mymovies41FrontendApp')
          var i, l = films.length;
          $scope.filmChunks = [];
 
-         for ( i = 0; i < l; i += 3) {
-                $scope.filmChunks.push( films.slice(i, i + 3) );
+         for ( i = 0; i < l; i += 6) {
+                $scope.filmChunks.push( films.slice(i, i + 6) );
          }
 
          $scope.films = films;

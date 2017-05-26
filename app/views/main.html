@@ -24,16 +24,16 @@
 <!-- Example row of columns -->
       <div class="row row-xs-height" ng-repeat="row in filmChunks">
         <!--<div class="col-sm-6 col-md-4" ng-repeat="film in row">-->
-        <div class="col-xs-12 col-sm-4" ng-repeat="film in row">
-            <div class="thumbnail" id="film-{{film.id}}" style="display:block; height:400px">
+        <div class="col-xs-6 col-sm-4 col-md-2" ng-repeat="film in row">
+            <div class="thumbnail" id="film-{{film.id}}" style="display:block; height:300px">
                 <a href='#/film/{{film.id}}'>
-                    <img ng-src="{{baseUrl}}/films/{{film.id}}/cover?x=215&y=140&cb={{imgTimestamp}}" alt="film cover image" class="img-rounded" style="width:215px;height:140px;">
+                    <img ng-src="{{baseUrl}}/films/{{film.id}}/cover?y=215&x=140&cb={{imgTimestamp}}" alt="film cover image" class="img-rounded" style="width:140px;height:215px;">
                 </a>
                 <div class="caption">
                     <a href='#/film/{{film.id}}'>
-                        <h2>{{film.title | limitTo:20}}</h2>
+                        <h4>{{film.title | limitTo:20}}</h4>
                     </a>
-                    <p>{{film.description | limitTo:60}} ...</p>
+                    <!--<p>{{film.description | limitTo:60}} ...</p>-->
                 </div>
             </div>
         </div>

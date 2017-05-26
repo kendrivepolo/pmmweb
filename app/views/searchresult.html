@@ -10,14 +10,14 @@
     </div>
 </form>
 
-<div class="col-xs-12 col-sm-4" ng-repeat="film in films">
+<div class="col-xs-6 col-sm-4 col-md-2" ng-repeat="film in films">
     <div class="thumbnail" id="film-{{film.filmId}}" style="display:block; height:350px">
         <a href='#/film/{{film.filmId}}'>
-            <img ng-src="{{baseUrl}}/films/{{film.filmId}}/cover?x=215&y=140" alt="film cover image" class="img-rounded" style="width:215px;height:140px;">
+            <img ng-src="{{baseUrl}}/films/{{film.filmId}}/cover?y=215&x=140" alt="film cover image" class="img-rounded" style="width:140px;height:215px;">
         </a>
         <div>
             <a href='#/film/{{film.filmId}}'>
-                <h3>{{film.title | limitTo:20}}</h3>
+                <h4>{{film.title | limitTo:20}}</h4>
             </a>
             <span ng-bind-html="film.highlightedText | limitTo:60"></span>
         </div>
