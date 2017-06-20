@@ -51,9 +51,15 @@ angular.module('mymovies41FrontendApp')
     */
     var showPager = function(startPage, totalFilmNumber) {
         angular.element('#pagination-demo').twbsPagination({
+        hideOnlyOnePage: true,
         startPage: startPage,
         totalPages: totalFilmNumber,
-        visiblePages: 10,
+        visiblePages: 5,
+        first: '<<',
+        last: '>>',
+        prev: '<',
+        next: '>',
+        itemOnPage: 8,
         onPageClick: function (event, page) {
             //$('#page-content').text('Page number' + totalFilmNumber);
             angular.element('#film-table').scope().gotoPage(page);

@@ -7,7 +7,7 @@ var MyBusinessServices = angular.module('MyBusinessServices', ['ngCookies']);
 MyBusinessServices.factory('checkCreds', ['$cookies', function($cookies) {
         return function() {
             var returnVal = false;
-            var blogCreds = $cookies.blogCreds;
+            var blogCreds = $cookies.get('blogCreds');
             if (blogCreds !== undefined && blogCreds !== '') {
                 returnVal = true;
             }
@@ -19,7 +19,7 @@ MyBusinessServices.factory('checkCreds', ['$cookies', function($cookies) {
 MyBusinessServices.factory('getToken', ['$cookies', function($cookies) {
         return function() {
             var returnVal = '';
-            var blogCreds = $cookies.blogCreds;
+            var blogCreds = $cookies.get('blogCreds');
             if (blogCreds !== undefined && blogCreds !== '') {
                 returnVal = btoa(blogCreds);
             }
@@ -31,7 +31,7 @@ MyBusinessServices.factory('getToken', ['$cookies', function($cookies) {
 MyBusinessServices.factory('getUsername', ['$cookies', function($cookies) {
         return function() {
             var returnVal = '';
-            var blogUsername = $cookies.blogUsername;
+            var blogUsername = $cookies.get('blogUsername');
             if (blogUsername !== undefined && blogUsername !== '') {
                 returnVal = blogUsername;
             }
@@ -43,7 +43,7 @@ MyBusinessServices.factory('getUsername', ['$cookies', function($cookies) {
 MyBusinessServices.factory('getUserkey', ['$cookies', function($cookies) {
         return function() {
             var returnVal = '';
-            var blogUserkey = $cookies.blogUserkey;
+            var blogUserkey = $cookies.get('blogUserkey');
             if (blogUserkey !== undefined && blogUserkey !== '') {
                 returnVal = blogUserkey;
             }
@@ -57,16 +57,16 @@ MyBusinessServices.factory('getUserkey', ['$cookies', function($cookies) {
 MyBusinessServices.factory('setCreds', ['$cookies', function($cookies) {
         return function(un, pw, ukey) {
             var token = un.concat(':', pw);
-            $cookies.blogCreds = token;
-            $cookies.blogUsername = un;
-            $cookies.blogUserkey = ukey;
+            $cookies.put('blogCreds',token);
+            $cookies.put('blogUsername',un);
+            $cookies.put('blogUserkey', ukey);
         };
 
     }]);
 
 MyBusinessServices.factory('deleteCreds', ['$cookies', function($cookies) {
         return function() {
-            $cookies.blogCreds = '';
-            $cookies.blogUsername = '';
+            $cookies.remove('blogCreds');
+            $cookies.remove('blogUsername');
         };
     }]);

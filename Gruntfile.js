@@ -68,7 +68,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
@@ -325,12 +325,8 @@ module.exports = function (grunt) {
           cwd: 'bower_components/bootstrap/dist',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
-        }, {
-          expand: true,
-          cwd: 'WEB-INF',
-          src: '*',
-          dest: '<%= yeoman.dist %>/WEB-INF'
-        }]
+        }
+        ]
       },
       styles: {
         expand: true,
@@ -349,9 +345,9 @@ module.exports = function (grunt) {
         'copy:styles'
       ],
       dist: [
-        'copy:styles',
-        'imagemin',
-        'svgmin'
+        'copy:styles'//,
+        //'imagemin',
+        //'svgmin'
       ]
     },
 
@@ -364,12 +360,12 @@ module.exports = function (grunt) {
     },
     //grunt-text-replace
     replace: {
-  another_example: {
+  anotherExample: {
     src: ['build/*.html'],
     overwrite: true,                 // overwrite matched source files
     replacements: [{
       from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
-      to: "<%= grunt.template.today('dd/mm/yyyy') %>"
+      to: '<%= grunt.template.today(\'dd/mm/yyyy\') %>'
     }]
   }
 }
@@ -416,7 +412,7 @@ module.exports = function (grunt) {
     'copy:dist',
     'cdnify',
     'cssmin',
-    'uglify',
+    //'uglify',
     'filerev',
     'usemin',
     'htmlmin'
@@ -424,7 +420,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'newer:jshint',
-    'test',
+    //'test',
     'build'
   ]);
 

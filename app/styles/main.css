@@ -32,9 +32,17 @@ body {
 }
 
 /* Customize container */
-@media (min-width: 768px) {
+@media (min-width: 768px) {/*768*/
+  .container-single {
+      max-width: 730px;
+  }
+}
+
+/* Customize container */
+@media (max-width: 1024px) {/*768*/
   .container {
     /*max-width: 730px;*/
+    max-width: 960px;
   }
 }
 .container-narrow > hr {

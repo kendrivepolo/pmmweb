@@ -7,7 +7,8 @@
         text-decoration: none !important;
     }
 </style>
-<div class="jumbotron">
+<center>
+<div class="container-single jumbotron">
     <h1><span editable-text="film.title" buttons="no" blur="submit">{{film.title}}</span></h1>
 
     <p class="lead">
@@ -109,7 +110,7 @@
     <div ng-show="showUpdateFilmResult" class="bg-danger">update film fails !</div>
 
     <p>
-        <button type="button" class="btn btn-info btn-block" ng-click="setFocus('Home');"><a href="#">Return</a></button>
+        <button type="button" class="btn btn-info btn-block" ng-click="setFocus('Home');"><a href="#!">Return</a></button>
         <!--<button type="button" class="btn btn-danger btn-block" ng-click="deleteFilm();">Delete</button>-->
         <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#myModal">Delete</button>
 
@@ -135,4 +136,5 @@
 
     </div>
 </div>
+</center>
 <div class="clearfix"></div>
